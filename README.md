@@ -1,11 +1,24 @@
 # Ride Matching Service
 
-The Ride Matching Service is a microservice in the ride-booking system that uses algorithms to match riders with nearby available drivers based on location, availability, and ratings.
+The Ride Matching Service uses algorithms to match riders with nearby available drivers based on location, availability, and ratings.
 
 ## Key Features
-- **Proximity Matching**: Matches drivers to riders using geospatial data.
-- **Algorithm Optimization**: Incorporates machine learning for efficient pairing over time.
-- **Priority Queue**: Selects drivers based on distance, traffic, and ratings.
+- Proximity Matching
+- Algorithm Optimization
+- Priority Queue
+
+## Recommended Tech Stack
+- **Runtime**: Go for high-performance matching algorithms [1][5].
+- **Framework**: Custom Go libraries or Node.js for alert management [1].
+- **Database**: Redis for caching driver availability; Riak for distributed storage [1].
+- **Machine Learning**: Python with Flask for optimizing matches over time [1].
+
+## System Design Structure
+- **Matching Engine**: Implements priority queue for driver selection.
+- **Location Fetcher**: Queries Location Service for proximity data.
+- **ML Module**: Uses historical data for improved matching.
+- **Cache Layer**: Redis stores active driver data for quick access.
+- **Event Handler**: Triggers notifications on successful matches.
 
 ## Architecture Diagram
 ```mermaid
@@ -17,9 +30,9 @@ API[API Gateway] -->|Routes Requests| RMS
 ```
 
 ## Interaction with Other Services
-The Ride Matching Service coordinates with other components to ensure optimal driver-rider pairing:
-- **API Gateway**: Receives ride requests routed to initiate matching processes.
-- **Location Service**: Fetches real-time location data to identify nearby drivers for matching.
-- **Ride Service**: Updates ride status once a match is confirmed, integrating the pairing into the ride lifecycle.
-- **Notification Service**: Sends notifications to drivers and passengers about successful matches or ride offers.
+The Ride Matching Service ensures optimal pairing:
+- **API Gateway**: Receives ride requests for matching.
+- **Location Service**: Fetches real-time driver locations.
+- **Ride Service**: Updates ride status post-match.
+- **Notification Service**: Alerts drivers and passengers of matches.
 
